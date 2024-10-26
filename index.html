@@ -63,13 +63,12 @@
             },
             mounted() {
                 // Fetch tasks from the backend when the component is mounted
-                fetch('http://localhost:3000/api/tasks')
-                    .then(response => response.json()) // Convert the response to JSON
+                fetch('https://express-backend-c3jy.onrender.com/api/tasks') // Updated URL
+                    .then(response => response.json())
                     .then(data => {
-                        // Map the fetched tasks to have 'action' and 'done' fields
                         this.tasks = data.map(task => ({
                             _id: task._id,
-                            action: task.action || task.taskName, // Ensure the property matches the backend
+                            action: task.action || task.taskName,
                             done: task.done
                         }));
                     })
@@ -89,7 +88,7 @@
                 },
                 addTaskToServer(newTask) {
                     // Send a POST request to add the task to the server
-                    fetch('http://localhost:3000/api/tasks', {
+                    fetch('https://express-backend-c3jy.onrender.com/api/tasks', { // Updated URL
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -106,12 +105,12 @@
                 },
                 updateTaskOnServer(task) {
                     // Send a PUT request to update the task's done status
-                    fetch(`http://localhost:3000/api/tasks/${task._id}`, {
+                    fetch(`https://express-backend-c3jy.onrender.com/api/tasks/${task._id}`, { // Updated URL
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ action: task.action, done: task.done }), // Ensure you're sending the task object
+                        body: JSON.stringify({ action: task.action, done: task.done }),
                     })
                     .then(response => {
                         if (!response.ok) {
